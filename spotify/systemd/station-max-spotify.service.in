@@ -1,0 +1,18 @@
+[Unit]
+Description=Station Max Spotify controller (ducking and voice commands)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=@ENV_FILE@
+ExecStart=@PYTHON@ @INSTALL_DIR@/spotify_control.py
+Restart=always
+RestartSec=10
+# The controller must keep running while the user session is active; no
+# additional privileges are required.
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=default.target
